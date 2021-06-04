@@ -1,0 +1,39 @@
+{
+  "name": "naskoc",
+  "version": "1.0.0",
+  "main": "./build/compiler.js",
+  "bin": "./build/compiler.js",
+  "description": "",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "chalk": "^4.1.1",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.170",
+    "@types/node": "^15.6.2",
+    "rimraf": "^3.0.2",
+    "inquirer": "^8.1.0",
+    "typescript": "^4.3.2"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "npm run build && node build/compiler.js",
+    "test": "npm run build && node tests/index.js",
+    "package": "npm run build && rimraf dist/ && pkg . && npm run _package",
+    "_package": "mkdir dist/linux && mkdir dist/macos && mv dist/naskoc-linux dist/linux/naskoc && mv dist/naskoc-macos dist/macos/naskoc"
+  },
+  "pkg": {
+    "scripts": "build/**/*.js",
+    "targets": [
+      "node14-linux-x64",
+      "node14-macos-x64"
+    ],
+    "outputPath": "dist"
+  },
+  "keywords": [],
+  "author": "cstanze",
+  "license": "MIT"
+}
